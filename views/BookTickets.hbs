@@ -1,0 +1,581 @@
+<main>
+    <!--================SEARCHING================-->
+    <form action="/BookTickets" style="margin-top: 4em;">
+        <div class="inner-form">
+
+            <select id="from" name="from" class="select-from form-control selectpicker">
+                <option disabled placeholder="Điểm đi">Điểm đi</option>
+                <option value="Sài Gòn">Sài Gòn</option>
+                <option value="Đà Lạt">Đà Lạt</option>
+                <option selected value="Nha Trang">Nha Trang </option>
+                <option value="Đà Nẵng">Đà Nẵng</option>
+                <option value="Vũng Tàu">Vũng Tàu </option>
+                <option value="Long An">Long An</option>
+                <option value="Buôn Mê Thuột">Buôn Mê Thuột</option>
+            </select>
+            <select id="to" name="to" class="select-to form-control selectpicker">
+                <option disabled>Điểm đến</option>
+                <option value="Sài Gòn">Sài Gòn</option>
+                <option selected value="Đà Lạt">Đà Lạt</option>
+                <option value="Nha Trang">Nha Trang </option>
+                <option value="Đà Nẵng">Đà Nẵng</option>
+                <option value="Vũng Tàu">Vũng Tàu </option>
+                <option value="Long An">Long An</option>
+                <option value="Buôn Mê Thuột">Buôn Mê Thuột</option>
+            </select>
+            <input id="date" name="date" type="date" class="select-date"/>
+            <button type="submit" class="btn btn-primary search-for-trip">Tìm kiếm</button>
+        </div>
+        <section class=" empty-section p-3 mx-auto"></section>
+        <div class="sort-vexe">
+            <span>Hãy chọn chuyến xe </span>
+            <select id="nhaxe" name="nhaxe" class="select-garage border-2">
+                <option value="">Nhà xe</option>
+                <option value="Hoa Mai">Hoa Mai</option>
+                <option value="Toàn Thắng">Toàn Thắng</option>
+                <option value="Thành Bưởi">Thành Bưởi </option>
+                <option value="Cúc Tùng">Cúc Tùng</option>
+                <option value="Phương Trang">Phương Trang </option>
+            </select>
+
+            <select id="giave" name="giave" class="select-price border-2">
+                <option value="">Giá Vé</option>
+                <option value="160000">160.000 VNĐ</option>
+                <option value="200000">200.000 VNĐ</option>
+                <option value="250000">250.000 VNĐ</option>
+                <option value="360000">360.000 VNĐ</option>
+            </select>
+            <select id="loaixe" name="loaixe" class="select-vehicle-type border-2">
+                <option value="">Loại xe</option>
+                <option value="giuongnam">Xe giường nằm</option>
+                <option value="ghengoi">Xe ghế ngồi</option>
+                <option value="limousine">Limousine</option>
+            </select>
+        </div>
+    </form>
+
+    <!--================CHUYENXE LIST================-->
+    <div class="list-trip container">
+        {{#each chuyenXe}}
+        <div class="trip-item">
+            <div class="select-limousine card col-md-6 col-12">
+                <div class="card-title row m-0 mb-3 p-0 d-flex justify-content-start">
+                    <div class="timeGroup col-4 col-md-3 mb-md-0 mb-3 me-2 me-md-0 p-0 d-flex">
+                        <time>{{chuyenInfo.ThoiGianKhoiHanh}}</time>
+                        <i class="fa-solid fa-arrow-right mx-2 d-flex justify-content-center align-items-center"></i>
+                        <time>{{chuyenInfo.ThoiGianDenNoi}}</time>
+                    </div>
+                    <h4 class=" fs-4 fw-bold col-6 col-md-3 m-0 mb-md-0 mb-3">{{nhaXeInfo.ten}}</h4>
+                    <div class="titleBtnGroup col-12 col-md-6 p-0 d-flex justify-content-start justify-content-md-end">
+                        <button type="button" class="btn btn-primary d-flex justify-content-center align-items-center">
+                            <i
+                                class="fa-solid fa-phone fa-sm me-2 d-flex justify-content-center align-items-center"></i>
+                            <p class="m-0">{{nhaXeInfo.sodt}}</p>
+                        </button>
+                        <button class="btn btn-primary d-flex align-items-center ms-3 px-2 py-1">
+                            <i class="fa fa-star fa-sm me-2"></i>
+                            <p class="m-0">{{nhaXeInfo.Rating}}</p>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-content row m-0 p-0 g-0">
+                    <div class="cardIMG" style="width: 150px; height: 150px;">
+                        <img src="https://benthanhford.com.vn/gw-content/images/limousine2019-wiLp0.jpg"
+                            alt="limousine" />
+                    </div>
+                    <div class="car-information container-fluid">
+                        <ul>
+                            <li class="price px-2 py-1" id="seat-price{{chuyenInfo._id}}">
+                                {{chuyenInfo.GiaVe}}<span>đ</span></li>
+                            <li class="type px-2 py-1" id="car-type{{chuyenInfo._id}}">{{#if (eq chuyenInfo.LoaiXe
+                                giuongnam)}}Giường nằm{{else if (eq chuyenInfo.LoaiXe ghengoi)}}Ghế
+                                ngồi{{else}}limousine{{/if}}</li>
+                            <li class="aval-seat px-2 py-1" id="seat-left">{{chuyenInfo.SoLuongGhe}}<span
+                                    class="ms-1">Chỗ trống</span></li>
+                        </ul>
+                        <div class="from-to">
+                            <svg class="TicketPC__LocationRoute" xmlns="http://www.w3.org/2000/svg" width="14"
+                                height="74" viewBox="0 0 14 74">
+                                <path fill="none" stroke="#787878" stroke-linecap="round" stroke-width="2"
+                                    stroke-dasharray="0 7" d="M7 13.5v46"></path>
+                                <g fill="none" stroke="#484848" stroke-width="3">
+                                    <circle cx="7" cy="7" r="7" stroke="none"></circle>
+                                    <circle cx="7" cy="7" r="5.5"></circle>
+                                </g>
+                                <path
+                                    d="M7 58a5.953 5.953 0 0 0-6 5.891 5.657 5.657 0 0 0 .525 2.4 37.124 37.124 0 0 0 5.222 7.591.338.338 0 0 0 .506 0 37.142 37.142 0 0 0 5.222-7.582A5.655 5.655 0 0 0 13 63.9 5.953 5.953 0 0 0 7 58zm0 8.95a3.092 3.092 0 0 1-3.117-3.06 3.117 3.117 0 0 1 6.234 0A3.092 3.092 0 0 1 7 66.95z"
+                                    fill="green">
+                                </path>
+                            </svg>
+                            <div class="from-to-content">
+                                <div class="content-time">
+                                    <div class="hour-depart">{{chuyenInfo.ThoiGianKhoiHanh}} - {{chuyenInfo.NgayKhoiHanh}}</div>
+                                    <div class="duration" style="color: green;">~{{t}}h</div>
+                                    <div class="hour-arrive">{{chuyenInfo.ThoiGianDenNoi}} - {{chuyenInfo.NgayDen}} </div>
+                                </div>
+
+                                <div class="content-place">
+                                    <div class="place-from mb-md-4 mb-0">• {{chuyenInfo.DiemBatDau}}
+                                    </div>
+                                    <div class="place-to">• {{chuyenInfo.DiemKetThuc}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="trip-select-details" class="d-block">
+                    <button class="btn btn-choose-trip btn-primary ms-3" style="float:right;"
+                        onclick="showSeatBooking('id{{chuyenInfo._id}}')">
+                        Chọn chuyến
+                    </button>
+                    <button type="button" class="btn btn-detail btn-primary" style="float: right;"
+                        onclick="showTripDetails('id{{chuyenInfo._id}}')">
+                        Thông tin chi tiết</button>
+                    <section class=" empty-section p-3 mx-auto"></section>
+                    <div class="tab-pane" style="display: none;" id="id{{chuyenInfo._id}}" class="mx-auto">
+                        <hr>
+                        <div class="detailsPane row p-0 d-flex justify-content-center mx-auto">
+                            <a class="col-4 p-0 text-center" href="javascript:void(0)"
+                                onclick="openstate(event, 'AllImages{{chuyenInfo._id}}');">
+                                <div class="tab-item tablink bottombar w3-border-red">Hình Ảnh</div>
+                            </a>
+                            <a class="col-4 p-0 text-center" href="javascript:void(0)"
+                                onclick="openstate(event, 'Rules{{chuyenInfo._id}}');">
+                                <div class="tab-item tablink bottombar">Chính Sách</div>
+                            </a>
+                            <a class="col-4 p-0 text-center" href="javascript:void(0)"
+                                onclick="openstate(event, 'Ratings{{chuyenInfo._id}}');">
+                                <div class="tab-item tablink bottombar">Đánh Giá</div>
+                            </a>
+                        </div>
+
+                        <div id="AllImages{{chuyenInfo._id}}" class="container-row state px-3" style="display:block">
+                            <div id="carousel{{chuyenInfo._id}}" class="carousel slide pl-2" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    {{#each chuyenInfo.HinhAnhXe}}
+                                    <li data-bs-target="#carousel{{../chuyenInfo._id}}" data-bs-slide-to="{{@index}}"
+                                        {{#if (eq @index 0)}}class="active" {{/if}}><img scr="{{this}}"
+                                            alt="Hinh {{@index}}" class="mx-auto">
+                                    </li>
+                                    {{/each}}
+                                </ol>
+                                <div class="carousel-inner" role="listbox">
+                                    {{#each chuyenInfo.HinhAnhXe}}
+                                    <div class="carousel-item {{#if (eq @index 0)}}active{{/if}}">
+                                        <img class="d-block" src="{{this}}" alt="Hình {{@index}}">
+                                    </div>
+                                    {{/each}}
+                                </div>
+                                <a class="left carousel-control" href="#carousel{{chuyenInfo._id}}" role="button"
+                                    data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#carousel{{chuyenInfo._id}}" role="button"
+                                    data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                                <button class="carousel-control-prev" data-bs-target="#carousel{{chuyenInfo._id}}"
+                                    data-bs-slide="prev" type="button">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" data-bs-target="#carousel{{chuyenInfo._id}}"
+                                    data-bs-slide="next" type="button">
+                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <div id="Rules{{chuyenInfo._id}}" class="container-row state px-3" style="display:none">
+                            <div class="Cancellation my-4">
+                                <h3 class="fw-bold">Chính sách hủy vé</h3>
+                            </div>
+                            <div class="cancellation-timeline p-0 row m-3 g-0 position-relative">
+                                <div class="timeBefore row col-6 p-0 m-0">
+                                    <p class="col-12 mb-2 text-center fs-5">Hôm nay</p>
+                                    <div class="processBar col-12 lh-md mb-2 text-center"
+                                        style="background: rgb(255, 199, 0);">
+                                        <i class="fa-solid fa-circle" style="color: white;"></i>
+                                    </div>
+                                    <p class="col-12 fs-5 text-center m-0">Không mất phí</p>
+                                </div>
+                                <div class="position-absolute top-0 start-50 translate-middle w-auto mt-3 text-center">
+                                    <p class="fw-bold m-0 p-0 lh-sm">18:50</p>
+                                    <p class="m-0 p-0 lh-sm">18/11/2022</p>
+                                </div>
+                                <div class="timeAfter col-6 p-0">
+                                    <p class="col-12 mb-2 pe-2 text-end fw-bold fs-5">Khởi hành</p>
+                                    <div class="processBar col-12 lh-md mb-2 text-end"
+                                        style="background: rgb(241, 0, 0);">
+                                        <i class="fa-solid fa-circle me-5" style="color: white;"></i>
+                                    </div>
+                                    <p class="col-12 fs-5 text-center m-0">Phí hủy 100%</p>
+                                </div>
+                            </div>
+                            <div class="note mx-3">
+                                <strong>Ghi Chú : </strong>Phí huỷ sẽ được tính trên giá gốc, không giảm trừ khuyến mãi
+                                hoặc giảm giá; đồng thời không vượt quá số tiền quý khách đã thanh toán.
+                            </div>
+                            <hr>
+                            <div class="policy-group-container m-3">
+                                <p class="fs-5 fw-bold">Yêu cầu khi lên xe:</p>
+                                <ul>
+                                    <li>
+                                        <p>Có mặt tại văn phòng/quầy vé/bến xe trước 30 phút để làm thủ tục lên xe</p>
+                                    </li>
+                                    <li>
+                                        <p>Đổi vé giấy trước khi lên xe</p>
+                                    </li>
+                                    <li>
+                                        <p>Xuất trình SMS/Email đặt vé trước khi lên xe</p>
+                                    </li>
+                                    <li>
+                                        <p>Không mang đồ ăn, thức ăn có mùi lên xe</p>
+                                    </li>
+                                    <li>
+                                        <p>Không hút thuốc, uống rượu, sử dụng chất kích thích trên xe</p>
+                                    </li>
+                                    <li>
+                                        <p>Không mang các vật dễ cháy nổ lên xe</p>
+                                    </li>
+                                    <li>
+                                        <p>Không vứt rác trên xe</p>
+                                    </li>
+                                    <li>
+                                        <p>Không làm ồn, gây mất trật tự trên xe</p>
+                                    </li>
+                                    <li>
+                                        <p>Không mang giày, dép trên xe </p>
+                                    </li>
+                                </ul>
+                                <p class="fs-5 fw-bold">Hành lý xách tay:</p>
+                                <ul>
+                                    <li>
+                                        <p>Tổng trọn lượng hành lý không vượt quá 20 Kg</p>
+                                    </li>
+                                    <li>
+                                        <p>Không vận chuyển hành hóa cồng kềnh</p>
+                                    </li>
+                                </ul>
+                                <p class="fs-5 fw-bold">Trẻ em và phụ nữ có thai:</p>
+                                <ul>
+                                    <li>
+                                        <p>Trẻ em dưới 7 tuổi hoặc dưới 130 cm được miễn phí vé nếu ngồi cùng ghế/giường
+                                            với bố mẹ</p>
+                                    </li>
+                                    <li>
+                                        <p>Phụ nữ mang thai cần đảm bảo sức khỏe trong suốt quá trình di chuyển</p>
+                                    </li>
+                                    <li>
+                                        <p>Nhà xe có quyền từ chối phục vụ nếu hành khách không tuân thủ quy định về trẻ
+                                            em và phụ nữ có thai</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div id="Ratings{{chuyenInfo._id}}" class="container-row state" style="display:none">
+                            {{#if (eq total 0)}}
+                            <div class="row info-row d-flex justify-content-start m-0 mb-2 p-0">
+                                <p class="col-5 fs-5 m-0 ms-1 p-0">Hiện tại chưa có bình luận nào</p>
+                            </div>
+                            {{else}}
+                            <div class="ratings d-flex mx-3 mb-4 p-0">
+                                <div class="totalRating d-flex me-3 px-2 py-1">
+                                    <i class="fa fa-star me-2 d-flex align-items-center"></i>
+                                    <span class="fs-5">{{average}}</span>
+                                </div>
+                                <div class="stars d-flex align-items-center me-3" data-rating="{{average}}"
+                                    data-num-stars="5"></div>
+                                <div class="totalNum d-flex align-items-center fs-5">({{total}} đánh giá)</div>
+                            </div>
+                            {{/if}}
+
+                            {{#each (dejsonify commentData)}}
+                            <div class="review-item-container p-3 mb-3">
+                                <div class="review-title mb-3 mx-2">
+                                    <div class="row info-row d-flex justify-content-start m-0 mb-2 p-0">
+                                        <img class="review-avatar col-1 p-0"
+                                            src="https://storage.googleapis.com/fe-production/svgIcon/avatar.svg"
+                                            alt="review-avatar" width="40" height="40">
+                                        <p class="col-5 fs-5 m-0 ms-1 p-0">Ẩn danh</p>
+                                    </div>
+                                    <div class="row rating-row d-flex justify-content-start m-0 p-0">
+                                        <span class="stars d-flex align-items-center me-3" data-rating="{{soSao}}"
+                                            data-num-stars="5"></span>
+                                    </div>
+                                </div>
+                                <div class="review-body mx-3">
+                                    <p class="mb-2">{{NoiDung}}</p>
+                                </div>
+                                <div class="review-footer mx-3">
+                                    <div class="row m-0 p-0 d-flex justify-content-start">
+                                        <div class="verifySection col-6 m-0 p-0 d-flex">
+                                            <p class="m-0 me-2">Đã mua vé</p>
+                                            <div class="material-icons-wrapper md-16 verified-icon ">
+                                                <i class="material-icons-round color--positive">(verified)</i>
+                                            </div>
+                                        </div>
+                                        <p class="col-6 fst-italic m-0 p-0 text-end"> Đăng ngày {{createdAt}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+
+                    <div class="seat-select" style="display: none" id="id{{chuyenInfo._id}}">
+                        <hr>
+                        <div class="container seat-map-with-title d-flex flex-column mx-auto"
+                            style="padding-bottom: 10px;">
+                            <div style="border-style: solid; border-radius: 4px;
+                             padding: 10px; margin: 0 200px;
+                             background-color: #FFFBF5;
+                             text-align: center;" class="border-1 d-flex align-items-center justify-content-center">
+                                Sơ đồ chuyến đi
+                            </div>
+                            <div class="container{{chuyenInfo._id}}" style="float: right;"
+                                onclick="verified(event, '{{chuyenInfo._id}}')">
+                                <div class="row" id="id{{chuyenInfo._id}}">
+                                    <div class="seat {{#if (eq chuyenInfo.DanhSachChoNgoi.[0] 1)}}sold{{/if}}">
+                                        1</div>
+                                    <div class="seat {{#if (eq chuyenInfo.DanhSachChoNgoi.[1] 1)}}sold{{/if}}">
+                                        2</div>
+                                    <div class="seat {{#if (eq chuyenInfo.DanhSachChoNgoi.[2] 1)}}sold{{/if}}">
+                                        3</div>
+                                    <div class="seat {{#if (eq chuyenInfo.DanhSachChoNgoi.[3] 1)}}sold{{/if}}">
+                                        4</div>
+                                </div>
+                                <div class="row" id="id{{chuyenInfo._id}}">
+                                    <div class="seat {{#if (eq chuyenInfo.DanhSachChoNgoi.[4] 1)}}sold{{/if}}">
+                                        5</div>
+                                    <div class="seat {{#if (eq chuyenInfo.DanhSachChoNgoi.[5] 1)}}sold{{/if}}">
+                                        6</div>
+                                    <div class="seat {{#if (eq chuyenInfo.DanhSachChoNgoi.[6] 1)}}sold{{/if}}">
+                                        7</div>
+                                    <div class="seat {{#if (eq chuyenInfo.DanhSachChoNgoi.[7] 1)}}sold{{/if}}">
+                                        8</div>
+                                </div>
+                                <div class="row" id="id{{chuyenInfo._id}}">
+                                    <div class="seat {{#if (eq chuyenInfo.DanhSachChoNgoi.[8] 1)}}sold{{/if}}">
+                                        9</div>
+                                    <div class="seat {{#if (eq chuyenInfo.DanhSachChoNgoi.[9] 1)}}sold{{/if}}">
+                                        10</div>
+                                    <div class="seat {{#if (eq chuyenInfo.DanhSachChoNgoi.[10] 1)}}sold{{/if}}">
+                                        11</div>
+                                    <div class="seat {{#if (eq chuyenInfo.DanhSachChoNgoi.[11] 1)}}sold{{/if}}">
+                                        12</div>
+                                </div>
+                                <div class="row" id="id{{chuyenInfo._id}}">
+                                    <div class="seat {{#if (eq chuyenInfo.DanhSachChoNgoi.[12] 1)}}sold{{/if}}">
+                                        13</div>
+                                    <div class="seat {{#if (eq chuyenInfo.DanhSachChoNgoi.[13] 1)}}sold{{/if}}">
+                                        14</div>
+                                    <div class="seat {{#if (eq chuyenInfo.DanhSachChoNgoi.[14] 1)}}sold{{/if}}">
+                                        15</div>
+                                    <div class="seat {{#if (eq chuyenInfo.DanhSachChoNgoi.[15] 1)}}sold{{/if}}">
+                                        16</div>
+                                </div>
+
+                                <section class=" empty-section p-4 mx-auto"></section>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="seat sold" style="background-color: #000;"></div>
+                            <span>Trống</span>
+                            <div class="seat sold"></div>
+                            <span>Đã Được Đặt</span>
+                            <div class="seat sold" style="background-color: #5CD6C0;"></div>
+                            <span>Đang Chọn</span>
+                        </div>
+                        <hr />
+                        <div class="d-block">
+                            <div>
+                                <span class="text" id="id{{chuyenInfo._id}}"> Tổng vé: </span>
+                                <span class="amount" id="id{{chuyenInfo._id}}"></span>
+                                <span class="text" id="id{{chuyenInfo._id}}">Ghế: </span>
+                                <span class="list-seat" id="id{{chuyenInfo._id}}"></span>
+
+
+                                <a class="btn" href="#" onclick="getInfoOfTicket('{{chuyenInfo._id}}')"
+                                    style="float: right; margin-left: 10px" role="button"
+                                    style="color: white; text-decoration: none;" id="pay{{chuyenInfo._id}}">Tiếp tục</a>
+
+                                <p class="text" style="float: right;">
+                                    Tổng cộng: <span class="total" id="id{{chuyenInfo._id}}"></span>
+                                    <span>đ</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        {{/each}}
+
+        <script type="text/javascript">
+
+            function setSeatData(carType, seatPrice) {
+                localStorage.setItem("carType", carType);
+                localStorage.setItem("seatPrice", seatPrice);
+            }
+
+            function verified(event, id) {
+                if (
+                    event.target.classList.contains("seat") &&
+                    !event.target.classList.contains("sold")
+                ) {
+                    event.target.classList.toggle("selected");
+                    updateSelectedCount(id);
+                }
+            }
+
+            function updateSelectedCount(id) {
+                let count = document.querySelector(".amount#id" + id);
+                let total = document.querySelector(".total#id" + id);
+                let carType = document.getElementById("car-type" + id);
+                let listSeat = document.querySelector(".list-seat#id" + id);
+
+                let selectedSeats = document.querySelectorAll(".row#id" + id + " .seat.selected");
+
+
+                let seatsIndex = []
+                selectedSeats.forEach((item) => seatsIndex.push(item.innerText))
+                console.log(id)
+                console.log(selectedSeats.length)
+
+                let ticketPrice = parseInt(document.querySelector("#seat-price" + id).innerText)
+
+                console.log(ticketPrice)
+
+                localStorage.setItem("selectedSeats", JSON.stringify(seatsIndex));
+
+                sessionStorage.setItem("selectedSeats" + id, JSON.stringify(seatsIndex))
+                const selectedSeatsCount = selectedSeats.length;
+
+                listSeat.innerText = seatsIndex;
+                count.innerText = selectedSeatsCount;
+                total.innerText = selectedSeatsCount * ticketPrice;
+                sessionStorage.setItem("tongTien" + id, selectedSeatsCount * ticketPrice);
+            }
+
+            function getInfoOfTicket(id) {
+                document.getElementById("pay" + id).setAttribute("href", "/user/payment/" + id + "/" + encodeURIComponent(sessionStorage.getItem("tongTien" + id)) + "/"
+                    + encodeURIComponent(sessionStorage.getItem("selectedSeats" + id)))
+            }
+
+            function populateUI(id, ds) {
+                console.log(ds)
+                let count = 0
+                const selectedSeats = JSON.parse(localStorage.getItem("selectedSeats"));
+                let seats = document.querySelectorAll(".row" + id + " .seat:not(.sold)");
+                if (selectedSeats !== null && selectedSeats.length > 0) {
+                    seats.forEach((seat, index) => {
+                        if (selectedSeats.indexOf(index) > -1) {
+                            console.log(seat.classList.add("selected"));
+                        }
+                    });
+                }
+            }
+
+            function addStar(id, num) {
+                for (var i = 0; i < num; i++) {
+                    $('.rating-stars-container #id' + id)
+                        .add('<span class="fa fa-star checked"></span>')
+                }
+
+                for (var i = 0; i < 5 - num; i++) {
+                    $('.rating-stars-container #id' + id)
+                        .add('<span class="fa fa-star"></span>')
+                }
+            }
+
+            function showSeatBooking(id) {
+                console.log("danh sach")
+                if (document.querySelector('.seat-select#' + id).style ===
+                    "display: table;") {
+                    document.querySelector('.seat-select#' + id).style =
+                        "display: none;"
+                } else {
+                    document.querySelector('.seat-select#' + id).style =
+                        "display: table;";
+                }
+                document.querySelector('.tab-pane#' + id).style = "display: none;"
+                document.querySelector('.seat-select').className = "seat-select mx-auto";
+                updateSelectedCount(id);
+                populateUI(id);
+            }
+
+            function showTripDetails(id) {
+                if (document.querySelector('.tab-pane#' + id).style ===
+                    "display: table;") {
+                    document.querySelector('.tab-pane#' + id).style =
+                        "display: none;"
+                } else {
+                    document.querySelector('.tab-pane#' + id).style =
+                        "display: table;";
+                }
+
+                document.querySelector('.seat-select#' + id).className = "seat-select"
+                document.querySelector('.seat-select#' + id).style = "display: none;";
+            }
+
+            function getStar(num) {
+
+            }
+
+            function openstate(evt, stateName) {
+                var i, x, tablinks;
+                x = document.getElementsByClassName("state");
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablink");
+                for (i = 0; i < x.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" w3-border-red", "");
+                }
+                document.getElementById(stateName).style.display = "block";
+                evt.currentTarget.firstElementChild.className += " w3-border-red";
+            }
+
+            $.fn.stars = function () {
+                return $(this).each(function () {
+                    var rating = $(this).data("rating");
+                    var fullStar = new Array(Math.floor(rating + 1)).join('<i class="fas fa-star"></i>');
+                    var halfStar = ((rating % 1) !== 0) ? '<i class="fas fa-star-half-alt"></i>' : '';
+                    var noStar = new Array(Math.floor($(this).data("numStars") + 1 - rating)).join('<i class="far fa-star"></i>');
+                    $(this).html(fullStar + halfStar + noStar);
+                });
+            }
+
+            //ES6
+            $.fn.stars = function () {
+                return $(this).each(function () {
+                    const rating = $(this).data("rating");
+                    const numStars = $(this).data("numStars");
+                    const fullStar = '<i class="fas fa-star"></i>'.repeat(Math.floor(rating));
+                    const halfStar = (rating % 1 !== 0) ? '<i class="fas fa-star-half-alt"></i>' : '';
+                    const noStar = '<i class="far fa-star"></i>'.repeat(Math.floor(numStars - rating));
+                    $(this).html(`${fullStar}${halfStar}${noStar}`);
+                });
+            }
+            $(function () {
+                $('#date').datepicker({
+                    "setDate": new Date(),
+                    "autoclose": true
+                });
+            });
+
+            $(function () {
+                $('.stars').stars();
+            });
+
+        </script>
+    </div>
+</main>

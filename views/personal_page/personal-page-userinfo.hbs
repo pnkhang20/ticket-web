@@ -1,0 +1,31 @@
+<main>
+    <div class="outline row mt-5 p-0 d-flex justify-content-center">
+        {{> sideNavBar}}
+        <div class="userinfo-card mx-3 p-0 col-md-6 col-12">
+            <form method="POST" action="changeInfo">
+                <div class="row row-space p-0">
+                    <label class="form-label">Họ và Tên</label>
+                    <input type="text" class="form-control mb-3" name="name" id="name" value="{{user.HoTen}}">
+                    <label for="phone" class="form-label">Số điện thoại</label>
+                    <input type="tel" class="form-control mb-3" name="phone" id="phone" value="{{user.SoDt}}" readonly>
+                    <label for="dob" class="form-label">Ngày sinh</label>
+                    <input type="date" class="form-control mb-3" id="dob" name="date" min="1920-01-01" value="{{dob}}">
+                    <span>Chọn giới tính</span>
+                    <label class="radio-inline">
+                        <input type="radio" name="gender" value="true" {{#if (eq user.GioiTinh true)}}checked{{/if}}>Nam
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="gender" value="false">Nữ</label>
+                    <!-- Thêm thông tin về gender-->
+                    <button type="submit" class="btn btn-primary mx-auto mt-3"
+                        style="width: 500px; align-content: center; background-color: #605DEC; align-items: center; border-color: #605DEC;">
+                        Cập nhật thông tin
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<br>
+<br>
+<br>

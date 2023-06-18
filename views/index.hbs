@@ -1,0 +1,54 @@
+{{> slogan}}
+
+<div class="container">
+    <form action="/BookTickets" style="margin-top: 4em;">
+        <div class="inner-form">
+            <select id="from" name="from" class="select-from form-control selectpicker">
+                <option disabled placeholder="Điểm đi ">Điểm đi</option>
+                <option value="Sài Gòn">Sài Gòn</option>
+                <option value="Đà Lạt">Đà Lạt</option>
+                <option selected value="Nha Trang">Nha Trang </option>
+                <option value="Đà Nẵng">Đà Nẵng</option>
+                <option value="Vũng Tàu">Vũng Tàu </option>
+                <option value="Long An">Long An</option>
+                <option value="Buôn Mê Thuột">Buôn Mê Thuột</option>
+            </select>
+            <select id="to" name="to" class="select-to form-control selectpicker">
+                <option disabled>Điểm đến</option>
+                <option value="Sài Gòn">Sài Gòn</option>
+                <option selected value="Đà Lạt">Đà Lạt</option>
+                <option value="Nha Trang">Nha Trang </option>
+                <option value="Đà Nẵng">Đà Nẵng</option>
+                <option value="Vũng Tàu">Vũng Tàu </option>
+                <option value="Long An">Long An</option>
+                <option value="Buôn Mê Thuột">Buôn Mê Thuột</option>
+            </select>
+            <input id="date" name="date" type="date" class="select-date" min: />
+            <select hidden id="nhaxe" name="nhaxe">
+                <option hidden value=""></option>
+            </select>
+            <select hidden id="giave" name="giave">
+                <option hidden value=""></option>
+            </select>
+            <select hidden id="loaixe" name="loaixe">
+                <option hidden value=""></option>
+            </select>
+            <button type="submit" class="btn btn-primary search-for-trip">Tìm kiếm</button>
+        </div>
+    </form>
+</div>
+<section class=" empty-section p-5 mx-auto"></section>
+
+<script>
+    let dropdownList = document.getElementById('from');
+    dropdownList.onchange = (ev) => {
+        let selecetedIndex = dropdownList.selectedIndex;
+        let selectedOption = dropdownList.options[selecetedIndex];
+    }
+    $(function () {
+        $('.select-date').datepicker({
+            "setDate": new Date(),
+            "autoclose": true
+        });
+    });
+</script>

@@ -1,0 +1,115 @@
+<main class="main-content position-relative border-radius-lg ">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur"
+        data-scroll="false">
+        <div class="container-fluid py-1 px-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin">Admin</a>
+                    </li>
+                    <li class="breadcrumb-item text-sm text-white active" aria-current="page">details</li>
+                </ol>
+                <h6 class="font-weight-bolder text-white mb-0">Thông tin chi tiết đặt vé</h6>
+            </nav>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header pb-0">
+                        <h3>Thông tin đặt vé chi tiết</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <h4>Thông tin của người đặt vé</h4>
+                            <div class="row">
+                                {{#with user}}
+                                <div class="col-3">
+                                    <label for="name">Họ và tên</label>
+                                    <input type="text" value="{{HoTen}}" readonly>
+                                </div>
+                                <div class="col-3">
+                                    <label for="email">Email người đặt</label>
+                                    <input type="text" value="{{email}}" readonly>
+                                </div>
+                                <div class="col-3">
+                                    <label for="phone">Số điện thoại</label>
+                                    <input type="text" value="{{SoDt}}" readonly>
+                                </div>
+                                {{/with}}
+                            </div>
+                            <hr>
+                            <h4>Thông tin vé</h4>
+                            <div class="row">
+                                {{#with veXe}}
+                                <div class="col-3">
+                                    <label for="num">Số lượng vé</label>
+                                    <input type="number" value="{{SoLuongGheDat}}" class="form-group" readonly >
+                                </div>
+                                <div class="col-3">
+                                    <label for="seats">Danh sách chỗ ngồi</label>
+                                    <input type="text" value="{{#each DanhSachGheNgoi}}{{this}} {{/each}}"
+                                        readonly>
+                                </div>
+                                <div class="col-3">
+                                    <label for="num">Tổng tiền</label>
+                                    <input type="number" value="{{TongTien}}" readonly>
+                                </div>
+                                <div class="col-3">
+                                    <label for="num">Tình Trạng</label>
+                                    <input type="number"
+                                        value="{{#if (eq DaThanhToan true)}}Đã thanh toán{{else}}Chưa thanh toán{{/if}}"
+                                        readonly>
+                                </div>
+                                {{/with}}
+                            </div>
+
+                            <div class="row">
+                                {{#with chuyenXe}}
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="start">Điểm bắt đầu</label>
+                                            <input type="text" value="{{DiemBatDau}}" readonly class="form-group">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="end">Điểm đến</label>
+                                        <input type="text" value="{{DiemKetThuc}}" readonly class="form-group">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="departureDate">Ngày khởi hành</label>
+                                        <input type="text" class="form-group" id="departureDate" name="departureDate"
+                                            readonly value="{{ThoiGianKhoiHanh}}" />
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="arrivalDate">Ngày đến nơi</label>
+                                        <input type="text" class="form-group" id="arrivalDate" name="arrivalDate"
+                                            readonly value="{{ThoiGianDenNoi}}" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="carType">Loại xe</label>
+                                        <input type="text" class="form-group"
+                                            value="{{#if (eq LoaiXe 9)}}Xe 9 chỗ{{else if (eq LoaiXe 12)}}Xe 12 chỗ{{else}}Limousine{{/if}}"
+                                            readonly>
+                                    </div>
+                                </div>
+                                {{/with}}
+                            </div>
+
+                            <a href="/admin/DatVe" class="btn btn-primary btn-lg active" role="button"
+                                aria-pressed="true">Quay lại</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

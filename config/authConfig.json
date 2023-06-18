@@ -1,0 +1,7 @@
+{
+    "SESSION_SECRET": "web04-group6-key",
+    "REDIS": {
+        "host": "localhost",
+        "port": 6393
+    }
+}

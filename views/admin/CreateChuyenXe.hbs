@@ -1,0 +1,156 @@
+<main class="main-content position-relative border-radius-lg ">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur"
+        data-scroll="false">
+        <div class="container-fluid py-1 px-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin">Admin</a>
+                    </li>
+                    <li class="breadcrumb-item text-sm text-white active" aria-current="page">createCX</li>
+                </ol>
+                <h6 class="font-weight-bolder text-white mb-0">Thêm chuyến xe</h6>
+            </nav>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header pb-0">
+                        <h3>Thêm chuyến xe</h3>
+                        <p class="text-subtitle text-muted">Nhập thông tin chuyến xe</p>
+                    </div>
+
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form action="CreateCX" method="post" class="form form-vertical">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="nhaXe">Chọn nhà xe</label>
+                                            <select class="select-from form-control selectpicker" id="nhaXe"
+                                                name="nhaXe" required>
+                                                <option selected disabled placeholder="Chọn nhà xe">Nhà xe</option>
+                                                <option value="Hoa Mai">Hoa Mai</option>
+                                                <option value="Phương Trang">Phương Trang</option>
+                                                <option value="Thành Bưởi">Thành Bưởi</option>
+                                                <option value="Cúc Tùng">Cúc Tùng</option>
+                                                <option value="Toàn Thắng">Toàn Thắng</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="start">Chọn điểm bắt đầu</label>
+                                                <select class="select-from form-control selectpicker" id="start"
+                                                    name="start" required onchange="modifyDestination()">
+                                                    <option selected disabled placeholder="Điểm bắt đầu">Điểm đi
+                                                    </option>
+                                                    <option value="Sài Gòn">Sài gòn</option>
+                                                    <option value="Đà Lạt">Đà Lạt</option>
+                                                    <option value="Nha Trang">Nha Trang </option>
+                                                    <option value="Đà Nẵng">Đà Nẵng</option>
+                                                    <option value="Vũng Tàu">Vũng Tàu </option>
+                                                    <option value="Long An">Long An</option>
+                                                    <option value="Buôn Mê Thuột">Buôn Mê Thuột</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="end">Chọn điểm đến</label>
+                                            <select class="select-from form-control selectpicker" id="end" name="end"
+                                                required>
+                                                <option selected disabled placeholder="Điểm kết thúc">Điểm đi</option>
+                                                <option value="Sài Gòn">Sài gòn</option>
+                                                <option value="Đà Lạt">Đà Lạt</option>
+                                                <option value="Nha Trang">Nha Trang </option>
+                                                <option value="Đà Nẵng">Đà Nẵng</option>
+                                                <option value="Vũng Tàu">Vũng Tàu </option>
+                                                <option value="Long An">Long An</option>
+                                                <option value="Buôn Mê Thuột">Buôn Mê Thuột</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="departureDate">Ngày khởi hành</label>
+                                            <input type="date" class="form-control" id="departureDate" min=getToday()
+                                                name="departureDate" required />
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="departureTime">Thời gian khởi hành</label>
+                                            <input type="time" class="form-control" id="departureTime"
+                                                name="departureTime" required />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="arrivalDate">Thời gian đến nơi</label>
+                                            <input type="date" class="form-control" id="arrivalDate" name="arrivalDate"
+                                                required />
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="arrivalTime">Thời gian đến nơi</label>
+                                            <input type="time" class="form-control" id="arrivalTime" name="arrivalTime"
+                                                required />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-10">
+                                        <label for="ImageLinks">Thêm các link hình ảnh vào</label>
+                                        <textarea class="form-control" id="ImageLinks" rows="3"
+                                            name="images"></textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="carType">Loại xe</label>
+                                            <select class="select-from form-control selectpicker" id="type" name="type"
+                                                required>
+                                                <option selected disabled placeholder="Chọn loại xe">Chọn loại xe
+                                                </option>
+                                                <option value="giuongnam">Giường nằm</option>
+                                                <option value="ghengoi">Ghế ngồi</option>
+                                                <option value="limousine">Limousine</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="ticketPrice">Giá vé</label>
+                                            <input type="number" class="form-control" id="ticketPrice"
+                                                name="ticketPrice" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <input type="submit" class="btn btn-primary me-1 mb-1" value="Save">
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+
+        today = yyyy + '-' + mm + '-' + dd;
+        
+        document.getElementById('departureDate').setAttribute('min', today.toString())
+        document.getElementById('arrivalDate').setAttribute('min', today.toString())
+    </script>
+</main>

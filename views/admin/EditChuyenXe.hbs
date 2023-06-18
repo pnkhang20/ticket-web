@@ -1,0 +1,168 @@
+<main class="main-content position-relative border-radius-lg ">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur"
+        data-scroll="false">
+        <div class="container-fluid py-1 px-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin">Admin</a>
+                    </li>
+                    <li class="breadcrumb-item text-sm text-white active" aria-current="page">editCX</li>
+                </ol>
+                <h6 class="font-weight-bolder text-white mb-0">Chỉnh sửa chuyến xe</h6>
+            </nav>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header pb-0">
+                        <h3>Chỉnh sửa chuyến xe</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            {{#with chuyenXe}}
+                            <form action="/admin/ChuyenXe/EditCX/{{_id}}" method="post" class="form form-vertical">
+                                {{/with}}
+                                <div class="row">
+                                    {{#with chuyenXe}}
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="start">Chỉnh sửa điểm bắt đầu</label>
+                                                <select class="select-from form-control selectpicker" id="start"
+                                                    name="start">
+                                                    <option selected disabled placeholder="Điểm bắt đầu">Điểm đi
+                                                    </option>
+                                                    <option value="Sài gòn" {{#if (eq "Sài gòn" DiemBatDau)}} selected
+                                                        {{/if}}>Sài Gòn</option>
+                                                    <option value="Đà Lạt" {{#if (eq "Đà Lạt" DiemBatDau)}} selected
+                                                        {{/if}}>Đà Lạt</option>
+                                                    <option value="Nha Trang" {{#if (eq "Nha Trang" DiemBatDau)}}
+                                                        selected {{/if}}>Nha Trang</option>
+                                                    <option value="Đà nẵng" {{#if (eq "Đà Nẵng" DiemBatDau)}} selected
+                                                        {{/if}}>Đà Nẵng</option>
+                                                    <option value="Vũng Tàu" {{#if (eq "Vũng Tàu" DiemBatDau)}} selected
+                                                        {{/if}}>Vũng Tàu</option>
+                                                    <option value="Long An" {{#if (eq "Long An" DiemBatDau)}} selected
+                                                        {{/if}}>Long An</option>
+                                                    <option value="Buôn Mê Thuột" {{#if (eq "Buôn Mê Thuột"
+                                                        DiemBatDau)}} selected {{/if}}>Buôn Mê Thuột</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="end">Chỉnh sửa điểm đến</label>
+                                            <select class="select-from form-control selectpicker" id="end" name="end"
+                                                required onload="changeEndData(this)">
+                                                <option value="Sài gòn" {{#if (eq "Sài gòn" DiemKetThuc)}} selected
+                                                    {{/if}}>Sài Gòn</option>
+                                                <option value="Đà Lạt" {{#if (eq "Đà Lạt" DiemKetThuc)}} selected
+                                                    {{/if}}>Đà Lạt</option>
+                                                <option value="Nha Trang" {{#if (eq "Nha Trang" DiemKetThuc)}} selected
+                                                    {{/if}}>Nha Trang</option>
+                                                <option value="Đà nẵng" {{#if (eq "Đà Nẵng" DiemKetThuc)}} selected
+                                                    {{/if}}>Đà Nẵng</option>
+                                                <option value="Vũng Tàu" {{#if (eq "Vũng Tàu" DiemKetThuc)}} selected
+                                                    {{/if}}>Vũng Tàu</option>
+                                                <option value="Long An" {{#if (eq "Long An" DiemKetThuc)}} selected
+                                                    {{/if}}>Long An</option>
+                                                <option value="Buôn Mê Thuột" {{#if (eq "Buôn Mê Thuột" DiemKetThuc)}}
+                                                    selected {{/if}}>Buôn Mê Thuột</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    {{/with}}
+                                    <div class="row">
+                                        {{#with fullDateStart}}
+                                        <div class="col-6">
+                                            <label for="departureDate">Chỉnh sửa ngày khởi hành</label>
+                                            <input type="date" class="form-control" id="departureDate"
+                                                name="departureDate" required value="{{this}}" />
+                                        </div>
+                                        {{/with}}
+                                        {{#with timeStart}}
+                                        <div class="col-6">
+                                            <label for="departureTime">Chỉnh sửa thời gian khởi hành</label>
+                                            <input type="time" class="form-control" id="departureTime"
+                                                name="departureTime" required value="{{this}}">
+                                        </div>
+                                        {{/with}}
+                                    </div>
+                                    <div class="row">
+                                        {{#with fullDateEnd}}
+                                        <div class="col-6">
+                                            <label for="arrivalDate">Chỉnh sửa ngày đến nơi</label>
+                                            <input type="date" class="form-control" id="arrivalDate" name="arrivalDate"
+                                                required value="{{this}}" />
+                                        </div>
+                                        {{/with}}
+                                        {{#with timeEnd}}
+                                        <div class="col-6">
+                                            <label for="arrivalTime">Chỉnh sửa thời gian đến nơi</label>
+                                            <input type="time" class="form-control" id="arrivalTime" name="arrivalTime"
+                                                required value="{{this}}" />
+                                        </div>
+                                        {{/with}}
+                                    </div>
+
+                                    {{#with chuyenXe}}
+                                    <div class="col-10">
+                                        <label for="ImageLinks">Chỉnh sửa link hình ảnh</label>
+                                        <textarea class="form-control" id="ImageLinks" rows="3" name="images"
+                                            value="Không có hình ảnh">{{#each HinhAnhXe}}{{this}}
+{{/each}}</textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="type">Loại xe</label>
+                                            <select class="select-from form-control selectpicker" id="type" name="type"
+                                                required onload="changeType(this)">
+                                                <option selected disabled placeholder="Chọn loại xe">Chỉnh sửa loại xe
+                                                </option>
+                                                <option value="Giường nằm" {{#if (eq "Giường nằm" LoaiXe)}} selected
+                                                    {{/if}}>Giường nằm
+                                                </option>
+                                                <option value="Ghế ngồi" {{#if (eq "Ghế ngồi" LoaiXe)}}selected {{/if}}>
+                                                    Ghế ngồi
+                                                </option>
+                                                <option value="limousine" {{#if (eq "limousine" LoaiXe)}}selected
+                                                    {{/if}}>Limousine
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="ticketPrice">Chỉnh sửa Giá vé</label>
+                                            <input type="number" class="form-control" id="ticketPrice"
+                                                name="ticketPrice" required value={{GiaVe}}>
+                                        </div>
+                                    </div>
+                                    {{/with}}
+                                    <div class="col-12 d-flex justify-content-center">
+                                        <input type="submit" class="btn btn-primary me-1 mb-1" value="Save">
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + "-" + mm + "-" + dd
+        document.getElementById("departureDate").setAttribute('min', today)
+        document.getElementById("arrivalDay").setAttribute('min', today)
+    </script>
+
+
+</main>

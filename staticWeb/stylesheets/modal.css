@@ -1,0 +1,39 @@
+
+.star-container button {
+    background: url(/img/star.svg) no-repeat;
+    height: 24px;
+    width: 30px;
+    margin-top: 2%;
+    border: none;
+    padding: none
+}
+
+.star-container button.hover {
+    background: url(/img/star-fill.svg) no-repeat;
+    opacity: 50%;
+}
+
+
+
+.star-container button.selected{
+    background: url(/img/star-fill.svg) no-repeat;
+    opacity: 100%;
+}
+
+
+.star-container {
+    width: 50% !important;
+    height: 10% !important;
+}
+
+.star-container ul {
+    list-style-type:none;
+    padding:0;
+    
+    -moz-user-select:none;
+    -webkit-user-select:none;
+  }
+  .star-container ul > li.star{
+    display:inline-block;
+    
+  }

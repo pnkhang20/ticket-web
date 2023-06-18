@@ -1,0 +1,26 @@
+
+<main>
+  <div class="outline  row mt-5 p-0 d-flex justify-content-center">
+    {{> sideNavBar}}
+    <div class="changepass-card mx-3 p-0 col-md-6 col-12">
+      <form method="post" action="changePass" enctype="multipart/form-data">
+        <div class="row row-space p-0">
+          <div class="mb-3">
+            <label for="oldpass" class="form-label">Mật khẩu hiện tại</label>
+            <input type="password" class="form-control" id="oldpass" name="oldpass">
+            <label for="newpass" class="form-label">Mật khẩu mới</label>
+            <input type="password" class="form-control" id="newpass" name="newpass">
+            <label for="confirmNewpass" class="form-label">Xác nhận mật khẩu mới</label>
+            <input type="password" class="form-control" id="confirmNewpass" name="confirmNewpass">
+          </div>
+          <button type="submit" class="btn btn-primary  mx-auto mt-3"
+            style="width: 500px; align-content: center; background-color:#605DEC; border-color:#605DEC;">Cập nhật thông
+            tin</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+<br>
+<br>
+<br>

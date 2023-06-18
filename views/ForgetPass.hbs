@@ -1,0 +1,41 @@
+<main class="wrapper-sign-up wrapper--w680">
+                        
+    <div class="card card-4">
+        <h2 class="title">Reset mật khẩu</h2>
+        <div class="card-body">
+            <div class="format">
+                <form method="POST" action="/auth/SendMail" >
+                    <div class="row row-space">                        
+                        <div class="input-group">
+                            <input class="input-style pass" type="email" id="email" placeholder="Nhập email"
+                                required name="email">
+                        </div>
+                        <div class="input-group">
+                            <button class="signup-button btn--radius-2 btn-primary-2" type="submit">Gửi email reset mật khẩu</button>
+                        </div>
+                    </div>
+                </form>
+                {{!-- <form method="POST" action="/auth/ResetPass" id="resetForm">
+                    <div class="row row-space">
+                        <input type="hidden" id="email_downform" name="email" value="email">
+                        <div class="input-group">
+                            <input class="input-style pass" type="text" id="stringReset" placeholder="Nhập mã reset"
+                                required name="text">
+                        </div>
+                        <div class="input-group">
+                            <button class="signup-button btn--radius-2 btn-primary-2" type="submit">Xác nhận</button>
+                        </div>
+                    </div>
+                </form> --}}
+            </div>
+        </div>
+    </div>
+
+    <script type="application/javascript">
+         $(document).ready(function () {
+            localStorage.setItem('email', document.getElementById('email').innerText)
+
+            document.getElementById('email_downform').value = localStorage.getItem('email')
+         })
+    </script>
+</main>

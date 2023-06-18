@@ -1,0 +1,58 @@
+<main class="main-content position-relative border-radius-lg ">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur"
+        data-scroll="false">
+        <div class="container-fluid py-1 px-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="/admin">Admin</a>
+                    </li>
+                    <li class="breadcrumb-item text-sm text-white active" aria-current="page">createNX</li>
+                </ol>
+                <h6 class="font-weight-bolder text-white mb-0">Thêm nhà xe</h6>
+            </nav>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header pb-0">
+                        <h3>Thêm nhà xe</h3>
+                        <p class="text-subtitle text-muted">Nhập thông tin nhà xe</p>
+                    </div>
+
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form action="CreateNX" method="post" class="form form-vertical"
+                                enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="tenNx">Tên nhà xe</label>
+                                        <input type="text" class="form-control" id="tenNx" name="tenNx" />
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="addr">Địa chỉ nhà xe</label>
+                                        <input type="text" class="form-control" id="addr" name="addr" />
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="tenNx">Số điện thoại</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" />
+                                </div>
+
+                                <div class="col-12 d-flex justify-content-center">
+                                    <input type="submit" class="btn btn-primary me-1 mb-1" value="Save">
+                                </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</main>

@@ -1,0 +1,168 @@
+<main>
+  <div class="outline row mt-5 p-0 d-flex justify-content-center">
+    {{> sideNavBar}}
+    <div class="ticketHistory-card tab-pane mx-3 p-0 col-md-6 col-12">
+      <div class="container-row">
+        <a href="javascript:void(0)" onclick="openstate(event, 'current');">
+          <div class="tab-item tablink bottombar w3-padding">Hiện tại</div>
+        </a>
+        <a href="javascript:void(0)" onclick="openstate(event, 'traveled');">
+          <div class="tab-item tablink bottombar w3-padding">Đã đi</div>
+        </a>
+        <a href="javascript:void(0)" onclick="openstate(event, 'Canceled');">
+          <div class="tab-item tablink bottombar w3-padding">Đã hủy</div>
+        </a>
+      </div>
+
+      <div id="current" class="state" style="display:none">
+        {{#if (isEmpty veChuaDi)}}<p>Hiện không có chuyến đi nào</p>
+        {{else}}
+        <div style="overflow-y:scroll; height:200px; position: relative; margin-left: 150px"
+          class="flex align-content-center">
+          {{#each veChuaDi}}
+          <div class="flex flex-column border border-secondary pb-2 mb-5 justify-content-center align-content-center"
+            style="width:fit-content; border-color: #000;">
+            <span style="text-align: center;">
+              <h3>{{chiTietVe.DiemBatDau}} - {{chiTietVe.DiemKetThuc}}</h3>
+            </span>
+            <div class="ve{{soBoVe._id}} d-flex justify-content-center pb-2 border-top border-secondary"
+              style="width: fit-content;">
+              <div class="numSeat d-flex align-items-center justify-content-center border-right border-secondary"
+                style="font-size: 40px">
+                <b>x{{soBoVe.SoLuongGheDat}}</b>
+              </div>
+              <div class="d-flex ticket-info flex-column">
+                <div class="d-flex justify-content-between">
+                  <div class="d-flex flex-column p-2">
+                    <div style="color: #747474">Điểm đón</div>
+                    <div><time>{{ThoiGianDi}}</time></div>
+                    <div>{{chiTietVe.TramDi}}</div>
+                  </div>
+                  <div class="d-flex flex-column p-2">
+                    <div style="color: #747474">Điểm trả</div>
+                    <div><time>{{ThoiGianDen}}</time></div>
+                    <div>{{chiTietVe.TramDen}}</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="p-2">Ghế ngồi: <span
+                      style="overflow-y: scroll; position:relative;height: 30px; width: 40px; color:#0060C4">{{soBoVe.DanhSachGheNgoi}}</span>
+                  </div>
+                  <div class="p-2">Tổng tiền <span style="color: #0060C4">{{soBoVe.TongTien}}</span></div>
+                  <a class="btn btn-danger" href="/user/cancel/{{soBoVe._id}}"
+                    onclick="return confirm('Bạn chắc không?')" id="delete{{soBoVe._id}}"> Hủy vé</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+        {{/if}}
+      </div>
+      <div id="traveled" class="state" style="display:none">
+        {{#if (isEmpty veDaDi)}}
+        <p>Bạn chưa đi chuyến nào</p>
+        {{else}}
+        <div style="overflow-y:scroll; height:200px; position: relative; " class="flex align-content-center">
+          {{#each veDaDi}}
+          <div class="flex flex-column border border-secondary pb-2 mb-5 justify-content-center align-content-center"
+            style="width:fit-content; border-color: #000; margin-left:150px">
+            <span style="text-align: center;">
+              <h3>{{chiTietVe.DiemBatDau}} - {{chiTietVe.DiemKetThuc}}</h3>
+            </span>
+            <div class="ve{{soBoVe._id}} d-flex border-top border-secondary justify-content-center pb-2">
+              <div class="numSeat d-flex align-items-center justify-content-center" style="font-size: 40px">
+                <b>x{{soBoVe.SoLuongGheDat}}</b>
+              </div>
+              <div class="d-flex ticket-info flex-column">
+                <div class="d-flex justify-content-between">
+                  <div class="d-flex flex-column p-2">
+                    <div style="color: #747474">Điểm đón</div>
+                    <div><time>{{ThoiGianDi}}</time></div>
+                    <div>{{chiTietVe.TramDi}}</div>
+                  </div>
+                  <div class="d-flex flex-column p-2">
+                    <div style="color: #747474">Điểm trả</div>
+                    <div><time>{{ThoiGianDen}}</time></div>
+                    <div>{{chiTietVe.TramDen}}</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="p-2">Ghế ngồi: <span
+                      style="overflow-y: scroll; position:relative;height: 30px; width: 40px; color:#0060C4">{{soBoVe.DanhSachGheNgoi}}</span>
+                  </div>
+                  <div class="p-2">Tổng tiền <span style="color: #0060C4">{{soBoVe.TongTien}}</span></div>
+                  <a class="btn btn-primary align-content-center" href="/user/comment/trip/{{soBoVe._id}}" role="button"
+                    aria-pressed="true"> Bình luận</a>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+          {{/each}}
+        </div>
+        {{/if}}
+      </div>
+
+      <div id="Canceled" class="state" style="display:none">
+        {{#if (isEmpty veHuy)}} <p>Bạn chưa đặt chuyến nào</p>
+        {{else}}
+        <div style="overflow-y:scroll; position: relative; height: 150px; margin-left: 150px">
+          {{#each veHuy}}
+          <div class="flex flex-column border border-secondary pb-2 mb-5 justify-content-center align-content-center"
+            style="width:fit-content; border-color: #000;">
+            <span style="text-align: center;">
+              <h3>{{chiTietVe.DiemBatDau}} - {{chiTietVe.DiemKetThuc}}</h3>
+            </span>
+            <div class="ve{{soBoVe._id}} d-flex border-top border-secondary justify-content-center pb-2">
+              <div class="border-right numSeat d-flex align-items-center justify-content-center"
+                style="font-size: 40px">
+                <b>x{{soBoVe.SoLuongGheDat}}</b>
+              </div>
+              <div class="d-flex ticket-info flex-column">
+                <div class="d-flex justify-content-between">
+                  <div class="d-flex flex-column p-2">
+                    <div style="color: #747474">Điểm đón</div>
+                    <div><time>{{ThoiGianDi}}</time></div>
+                    <div>{{chiTietVe.TramDi}}</div>
+                  </div>
+                  <div class="d-flex flex-column p-2">
+                    <div style="color: #747474">Điểm trả</div>
+                    <div><time>{{ThoiGianDen}}</time></div>
+                    <div>{{chiTietVe.TramDen}}</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="p-2">Ghế ngồi: <span
+                      style="overflow-y: scroll; position:relative;height: 30px; width: 40px; color:#0060C4">{{soBoVe.DanhSachGheNgoi}}</span>
+                  </div>
+                  <div class="p-2">Tổng tiền <span style="color: #0060C4">{{soBoVe.TongTien}}</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+        {{/if}}
+
+      </div>
+      <script>
+
+        function openstate(evt, stateName) {
+          var i, x, tablinks;
+          x = document.getElementsByClassName("state");
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+          }
+          tablinks = document.getElementsByClassName("tablink");
+          for (i = 0; i < x.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" w3-border-red", "");
+          }
+          document.getElementById(stateName).style.display = "block";
+          evt.currentTarget.firstElementChild.className += " w3-border-red";
+        }
+      </script>
+    </div>
+  </div>
+</main>

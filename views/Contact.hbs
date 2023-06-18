@@ -1,0 +1,195 @@
+<style>
+    .page_title,
+    .title {
+        color: #605DEC;
+    }
+
+    .text span {
+        color: #7C8DB0;
+        font-size: large;
+    }
+
+    .mapouter {
+        position: relative;
+        text-align: right;
+        width: 600px;
+        height: 400px;
+    }
+
+    .gmap_canvas {
+        overflow: hidden;
+        background: none !important;
+        width: 600px;
+        height: 400px;
+    }
+
+    .gmap_iframe {
+        width: 600px !important;
+        height: 400px !important;
+        margin: 0 90px;
+    }
+
+    .format {
+        margin: 0 60px;
+    }
+
+    .image-address {
+        margin-right: 130px;
+    }
+
+    .signup-button {
+        width: 100px;
+        height: 50px;
+        float: right;
+        margin: 0 30px;
+    }
+
+    .form-map {
+        margin: 0 100px;
+    }
+
+    .search-address {
+        display: inline;
+        float: start;
+    }
+
+    .row {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+
+
+
+<section class=" empty-section p-5 mx-auto"></section>
+
+<main>
+    <div class="main-body">
+        <div class="d-flex justify-content-center h1 page_title">
+            Liên Hệ
+        </div>
+    </div>
+    <div class="text">
+        <span class="d-flex justify-content-center align-content-center">Cảm ơn các bạn đã ghé thăm website của
+            chúng tôi. Nếu các bạn muốn nhận <br>
+            được thông tin từ chúng tôi dễ dàng, hãy điền vào form dưới đây</span>
+    </div>
+    <section class="empty-section p-5 mx-auto"></section>
+    <div class="container d-flex justify-content-center">
+        <div class="format float">
+            <form method="POST">
+                <div class="row row-space">
+                    <div class="input">
+                        <label for="fname">Họ và tên *:</label>
+                        <br>
+                        <input class="input-style" type="name" id="name" placeholder="Họ và tên" required>
+                    </div>
+                    <div class="input">
+                        <label for="fname">Số Điện Thoại*:</label>
+                        <br>
+                        <input class="input-style" type="tel" id="tel" placeholder="Nhập số điện thoại" required>
+                    </div>
+                    <div class="input">
+                        <label for="fname">Email*:</label>
+                        <br>
+                        <input class="input-style" type="email" id="email" placeholder="Nhập email" required>
+                    </div>
+                    <div class="input">
+                        <label for="fname">Tiêu đề*:</label>
+                        <br>
+                        <input class="input-style" type="text" id="text" placeholder="Tiêu đề" required>
+                    </div>
+                    <div class="input">
+                        <label for="fname">Nội Dung*:</label>
+                        <br>
+                        <textarea rows="5" cols="53" placeholder="Nội dung " style="resize: none;" required> </textarea>
+                    </div>
+                    <div class="input" style="margin-left: 50px;">
+                        <button class="signup-button btn btn--radius-2 btn-primary" type="submit">Gửi</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="image-address">
+            <div class="mapouter mt-4">
+                <div class="gmap_canvas">
+                    <iframe class="gmap_iframe" frameborder="0" scrolling="no" marginheight="30" marginwidth="60"
+                        src="https://maps.google.com/maps?width=400&amp;height=400&amp;hl=en&amp;q=đại học khoa học tự nhiên&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+                    </iframe>
+                    <a href="https://piratebay-proxys.com/">Piratebay</a>
+                </div>
+                <div class="address" style="text-align: left; font-size: large; margin-left: 90px;">
+                    <span>Địa Chỉ: số 227 Nguyễn Văn Cừ, Phường 3, Quận 5, TP.HCM </span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+{{!-- 
+    <section class=" empty-section p-5 mx-auto"></section> --}}
+
+    {{!-- <div class="title d-flex justify-content-center align-content-center h2">
+        <p>Danh sách nhà xe</p>
+    </div>
+    <div class="search-container d-flex justify-content-center">
+        <form action="/action_page.php">
+            <input type="text" placeholder="Tìm kiếm nhà xe" name="search" class="input-style">
+            <button type="submit" class="signup-button btn btn--radius-2 btn-primary ms-0 mt-1">Submit</button>
+        </form>
+    </div> --}}
+
+    {{!-- <section class=" empty-section p-5 mx-auto"></section> --}}
+
+    <div class="Southside">
+        <div class="title h3">
+            <span class="d-flex align-content-center justify-content-center">Danh sách nhà xe</span>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="Namvang col">
+                    <p class="fw-bold">Nhà xe {{nhaXe.[0].TenNhaXe}}</p>
+                    <p>Sdt: {{nhaXe.[0].SoDT}}</p>
+                    <p>Địa chỉ: {{nhaXe.[0].DiaChiNhaXe}}</p>
+                </div>
+                <div class="Haisai col">
+                   <p class="fw-bold">Nhà xe {{nhaXe.[1].TenNhaXe}}</p>
+                    <p>Sdt: {{nhaXe.[1].SoDT}}</p>
+                    <p>Địa chỉ: {{nhaXe.[1].DiaChiNhaXe}}</p>
+                </div>
+                <div class="CuuLong col">
+                    <p class="fw-bold">Nhà xe {{nhaXe.[2].TenNhaXe}}</p>
+                    <p>Sdt:  {{nhaXe.[2].SoDT}}</p>
+                    <p>Địa chỉ: {{nhaXe.[2].DiaChiNhaXe}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="Northside">
+        <div class="container">
+            <div class="row">
+                <div class="Ngo col">
+                    <p class="fw-bold">Nhà xe {{nhaXe.[3].TenNhaXe}}</p>
+                    <p>Sdt:  {{nhaXe.[3].SoDT}}</p>
+                    <p>Địa chỉ: {{nhaXe.[3].DiaChiNhaXe}}</p>
+                </div>
+                <div class="HaDong col">
+                   <p class="fw-bold">Nhà xe {{nhaXe.[4].TenNhaXe}}</p>
+                    <p>Sdt:  {{nhaXe.[4].SoDT}}</p>
+                    <p>Địa chỉ: {{nhaXe.[4].DiaChiNhaXe}}</p>
+                </div>
+                <div class="HaiPhong col">
+                     <p class="fw-bold">Nhà xe {{nhaXe.[5].TenNhaXe}}</p>
+                    <p>Sdt:  {{nhaXe.[5].SoDT}}</p>
+                    <p>Địa chỉ: {{nhaXe.[5].DiaChiNhaXe}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Empty Section for some space-->
+{{!-- <section class=" empty-section p-5 mx-auto"></section> --}}
